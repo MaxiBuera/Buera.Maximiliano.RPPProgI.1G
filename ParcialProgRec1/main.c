@@ -15,29 +15,28 @@ int contarCaracteres(char* cadena, char caracter);
 /*3)Dada la estructura Notebook(id, procesador, marca, precio) generar una función que permita ordenar un
     array de dicha estructura por marca. Ante igualdad de marca deberá ordenarse por precio. Hardcodear datos y
     mostrarlos desde el main. */
-
 typedef struct{
     int id;
     char procesador[20];
     char marca[20];
     float precio;
 }eNotebook;
+
+
 void ordenar(char* cadena);
 
 int main()
 {
     //1)
-    float precioProducto;
+    /*float precioProducto;
     printf("\nIngrese precio: ");
     scanf("%f",&precioProducto);
-    aplicarDescuento(precioProducto);
+    aplicarDescuento(precioProducto);*/
 
 
     //2)
-    int resultado2 = contarCaracteres("Hola",'a');
-    printf("Cantidad de veces que se repite el caracter: %d", resultado2);
-
-
+    int resultado2 = contarCaracteres("Hala",'a');
+    printf("\nCantidad de veces que se repite el caracter: %d\n", resultado2);
 
     return 0;
 }
@@ -51,15 +50,17 @@ float aplicarDescuento(float precioProducto){
 
 int contarCaracteres(char* cadena, char caracter){
 
-    int i;
+    char *i;
+    i = cadena;
     int contador=0;
 
-    while(cadena[i]!='\0'){
+    while(*i != '\0'){
 
-        if(cadena[i] == caracter){
+        if(*i == caracter){
 
             contador++;
         }
+
         i++;
     }
 
