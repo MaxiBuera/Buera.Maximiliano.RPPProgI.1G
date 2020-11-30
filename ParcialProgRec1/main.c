@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#define NOTEBOOKS 3
+#define NOTEBOOKS 5
 
 /*1)Crear una función llamada aplicarDescuento que reciba como parámetro el precio de un
     producto y devuelva el valor del producto con un descuento del 5%. Realizar la llamada desde el main. */
@@ -24,9 +24,11 @@ typedef struct{
 }eNotebook;
 
 eNotebook arrayNotebooks[NOTEBOOKS] = {
+    {0,"HQ","ASD",100000},
     {0,"Intel","Compaq",100000},
     {0,"AMD","ASD",300000},
-    {0,"HQ","NOSE",200000},
+    {0,"HQ","ASD",200000},
+    {0,"HQ","NOSE",100000},
 };
 
 void ordenarArray(eNotebook* arrayNotebooks,int orden);
@@ -36,10 +38,12 @@ int main()
     int i=0;
 
     //1)
-    /*float precioProducto;
+    float precioProducto;
+    float precioDescuento;
     printf("\nIngrese precio: ");
     scanf("%f",&precioProducto);
-    aplicarDescuento(precioProducto);*/
+    precioDescuento = aplicarDescuento(precioProducto);
+    printf("Descuento: %.2f\n",precioDescuento);
 
 
     //2)
@@ -52,32 +56,28 @@ int main()
 
     for(i=0;i<NOTEBOOKS;i++){
 
-        printf("\n%s",arrayNotebooks[i].marca);
+        printf("\n%s %.2f",arrayNotebooks[i].marca,arrayNotebooks[i].precio);
     }
-
+    printf("\n");
     return 0;
 }
 
 float aplicarDescuento(float precioProducto){
 
-    float precioDescuento = precioProducto * 0.95;
-
-    return printf("Descuento: %.2f",precioDescuento);
+    return precioProducto * 0.95;
 }
 
 int contarCaracteres(char* cadena, char caracter){
 
-    char *i;
-    i = cadena;
+    int i=0;
     int contador=0;
 
-    while(*i != '\0'){
-
-        if(*i == caracter){
+    //while(*i != '\0'){
+    while(cadena[i] != '\0'){
+        if(cadena[i] == caracter){
 
             contador++;
         }
-
         i++;
     }
 
@@ -86,40 +86,34 @@ int contarCaracteres(char* cadena, char caracter){
 
 void ordenarArray(eNotebook* arrayNotebooks,int orden){
 
-    int flagSwap;
-    int i;
+    int i,j;
     eNotebook auxiliar;
 
     if(arrayNotebooks != NULL)
     {
-        do
-        {
-            flagSwap = 0;
-            for(i=0;i<NOTEBOOKS-1;i++)
-            {
+        for(i=0;i<NOTEBOOKS-1;i++){
 
-                if((strcmp(arrayNotebooks[i].marca,arrayNotebooks[i+1].marca) > 0 && !orden) || (strcmp(arrayNotebooks[i].marca,arrayNotebooks[i+1].marca) < 0 && orden)) //<------------
-                {
-                    if((strcmp(arrayNotebooks[i].marca,arrayNotebooks[i+1].marca) == 0){
+            for(j=i+1;j<NOTEBOOKS;j++){
 
-                        if(arrayNotebooks[i].precio > arrayNotebooks[i+1].precio){
-
-                            auxiliar = arrayNotebooks[i];
-                            arrayNotebooks[i] = arrayNotebooks[i+1];
-                            arrayNotebooks[i+1] = auxiliar;
-                            flagSwap = 1;
-                       }
-                    }
+                if(strcmp(arrayNotebooks[i].marca, arrayNotebooks[j].marca) > 0){
 
                     auxiliar = arrayNotebooks[i];
-                    arrayNotebooks[i] = arrayNotebooks[i+1];
-                    arrayNotebooks[i+1] = auxiliar;
-                    flagSwap = 1;
+                    arrayNotebooks[i] = arrayNotebooks[j];
+                    arrayNotebooks[j] = auxiliar;
                 }
+                else if(strcmp(arrayNotebooks[i].marca, arrayNotebooks[j].marca) == 0 && arrayNotebooks[i].precio > arrayNotebooks[j].precio){
 
+                    auxiliar = arrayNotebooks[i];
+                    arrayNotebooks[i] = arrayNotebooks[j];
+                    arrayNotebooks[j] = auxiliar;
+                }
             }
-        }while(flagSwap);
+        }
     }
 
 }
+
+
+
+
 
