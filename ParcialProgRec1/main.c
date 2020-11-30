@@ -47,8 +47,11 @@ int main()
 
 
     //2)
-    int resultado2 = contarCaracteres("Hala",'a');
-    printf("\nCantidad de veces que se repite el caracter: %d\n", resultado2);
+    char* cadena = "Hala";
+    char caracter = 'a';
+    int resultado2 = contarCaracteres(cadena,caracter);
+    printf("\nCadena: %s",cadena);
+    printf("\nCantidad de veces que se repite el caracter '%c': %d\n",caracter,resultado2);
 
 
     //3)
