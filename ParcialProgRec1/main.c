@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#define NOTEBOOKS 3
 
 /*1)Crear una función llamada aplicarDescuento que reciba como parámetro el precio de un
     producto y devuelva el valor del producto con un descuento del 5%. Realizar la llamada desde el main. */
@@ -22,11 +23,18 @@ typedef struct{
     float precio;
 }eNotebook;
 
+eNotebook arrayNotebooks[NOTEBOOKS] = {
+    {0,"Intel","Compaq",100000},
+    {0,"AMD","ASD",300000},
+    {0,"HQ","NOSE",200000},
+};
 
-void ordenar(char* cadena);
+void ordenarArray(eNotebook* arrayNotebooks,int orden);
 
 int main()
 {
+    int i=0;
+
     //1)
     /*float precioProducto;
     printf("\nIngrese precio: ");
@@ -37,6 +45,15 @@ int main()
     //2)
     int resultado2 = contarCaracteres("Hala",'a');
     printf("\nCantidad de veces que se repite el caracter: %d\n", resultado2);
+
+
+    //3)
+    ordenarArray(arrayNotebooks,0);
+
+    for(i=0;i<NOTEBOOKS;i++){
+
+        printf("\n%s",arrayNotebooks[i].marca);
+    }
 
     return 0;
 }
@@ -65,5 +82,44 @@ int contarCaracteres(char* cadena, char caracter){
     }
 
     return contador;
+}
+
+void ordenarArray(eNotebook* arrayNotebooks,int orden){
+
+    int flagSwap;
+    int i;
+    eNotebook auxiliar;
+
+    if(arrayNotebooks != NULL)
+    {
+        do
+        {
+            flagSwap = 0;
+            for(i=0;i<NOTEBOOKS-1;i++)
+            {
+
+                if((strcmp(arrayNotebooks[i].marca,arrayNotebooks[i+1].marca) > 0 && !orden) || (strcmp(arrayNotebooks[i].marca,arrayNotebooks[i+1].marca) < 0 && orden)) //<------------
+                {
+                    if((strcmp(arrayNotebooks[i].marca,arrayNotebooks[i+1].marca) == 0){
+
+                        if(arrayNotebooks[i].precio > arrayNotebooks[i+1].precio){
+
+                            auxiliar = arrayNotebooks[i];
+                            arrayNotebooks[i] = arrayNotebooks[i+1];
+                            arrayNotebooks[i+1] = auxiliar;
+                            flagSwap = 1;
+                       }
+                    }
+
+                    auxiliar = arrayNotebooks[i];
+                    arrayNotebooks[i] = arrayNotebooks[i+1];
+                    arrayNotebooks[i+1] = auxiliar;
+                    flagSwap = 1;
+                }
+
+            }
+        }while(flagSwap);
+    }
+
 }
 
